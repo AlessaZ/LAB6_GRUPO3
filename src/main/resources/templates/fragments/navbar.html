@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <!--Navbar-->
+    <header th:fragment="navbar(opcion)">
+        <!--Pestañas-->
+        <nav class="navbar nav-pills nav-fill">
+            <a th:class="|nav-link ${opcion eq 'empleadoSueldo' ? 'active' : ''}|"
+               th:href="@{/employee/employeeSueldo}">Ejercicio 1 (a)</a>
+            <a th:class="|nav-link ${opcion eq 'empleadoExperiencia' ? 'active' : ''}|"
+               th:href="@{/employee/emplExperiencia}">Ejercicio 1 (b)</a>
+            <a th:class="|nav-link ${opcion eq 'lista' ? 'active' : ''}|"
+               th:href="@{/employee/lista}">Ejercicio 2 (a)</a>
+            <a th:class="|nav-link ${opcion eq 'b' ? 'active' : ''}|"
+               th:href="@{/employee/employeeSueldo}">Ejercicio 2 (b)</a>
+        </nav>
+    </header>
+</html>

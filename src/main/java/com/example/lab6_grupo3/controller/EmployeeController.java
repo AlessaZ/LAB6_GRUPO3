@@ -2,6 +2,7 @@ package com.example.lab6_grupo3.controller;
 
 import com.example.lab6_grupo3.entity.Employee;
 import com.example.lab6_grupo3.repository.DepartamentRepository;
+import com.example.lab6_grupo3.entity.Employee;
 import com.example.lab6_grupo3.repository.EmployeeRepository;
 import com.example.lab6_grupo3.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = {"", "/", "/employee"})
@@ -33,7 +36,7 @@ public class EmployeeController {
     @Autowired
     DepartamentRepository departamentRepository;
 
-    @GetMapping(value = {"/employeeSueldo"})
+    @GetMapping(value = {"","/employeeSueldo"})
     public String listaEmployeeSueldo(Model model, @RequestParam(value = "sueldo",required = false) Double monto) {
 
         BigDecimal montoDecimal = BigDecimal.valueOf(0);
@@ -60,6 +63,33 @@ public class EmployeeController {
         model.addAttribute("listaDepartamentos",departamentRepository.findAll());
         return "employee/nuevoempleado";
     }
+    @GetMapping(value = {"/emplExperiencia"})
+    public String empleadoExperiencia(Model model){
+        model.addAttribute("listEmpleadoExperiencia",employeeRepository.listarExmpleadoExperiencia());
+        return "employee/empleadoExperiencia";
+    }
+
+    @GetMapping("/lista")
+    public String listaGeneral(Model model){
+        model.addAttribute("listaGeneral",employeeRepository.findAll());
+        return "employee/lista";
+    }
+
+    @GetMapping("/renta")
+    public String renta(Model model,@RequestParam("id") Integer id){
+        Optional<Employee> optionalEmp= employeeRepository.findById(id);
+        if (optionalEmp.isPresent()) {
+            Employee employee = optionalEmp.get();
+            model.addAttribute("empleado", employee);
+            model.addAttribute("renta",employeeRepository.findEmployeeRenta(id));
+            return "employee/renta";
+        } else {
+            return "redirect:/lista";
+        }
+    }
+
+
+
 
     @PostMapping(value = {"/employeeSave"})
     public String guardarEmpleado(@ModelAttribute("empleado") @Valid Employee empleado, BindingResult bindingResult, RedirectAttributes attr, Model model){

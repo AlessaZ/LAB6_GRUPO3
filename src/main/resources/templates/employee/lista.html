@@ -11,18 +11,9 @@
     <body>
         <!-- Navbar-->
         <div class="container">
-            <header th:replace="fragments/navbar.html :: navbar(opcion = 'empleadoSueldo')"></header>
+            <header th:replace="fragments/navbar.html :: navbar(opcion = 'lista')"></header>
         </div>
-        <div class="container text-center ">
-            <h1 th:text="${'Lista de empleados con sueldo mayor a '+ monto }"></h1>
-            <div class="container justify-content-center" style="width: 250px;">
-                <form class=" text-center" th:method="get" th:action="@{/employee/employeeSueldo}">
-                    <label for="sueldo" class="form-label">Ingrese monto mínimo</label>
-                    <input type="number" class="form-control" id="sueldo" name="sueldo">
-                </form>
-            </div>
-
-        </div>
+        <h2 class="text-center">Lista Empleados</h2>
 
         <div class="container mt-5">
             <table class="table table-striped table-bordered table-hover">
@@ -31,28 +22,28 @@
                     <tr class="text-center text-nowrap" id="cabecera-container">
                         <th>#</th>
                         <th><a class="text-decoration-none text-dark d-flex justify-content-between">
-                            Departamento
+                            Nombre
                         </a></th>
                         <th><a class="text-decoration-none text-dark d-flex justify-content-between">
-                            Empleado
+                            Apellido
                         </a></th>
                         <th><a class="text-decoration-none text-dark d-flex justify-content-between">
-                            Jefe del empleado
+                            Sueldo
                         </a></th>
                         <th>
                             <a class="text-decoration-none text-dark d-flex justify-content-between">
-                                Jefe del departamento</a>
+                                Obtener Renta de 5to Categoria</a>
                         </th>
                     </tr>
                 </thead>
                 <!--Rows-->
                 <tbody>
-                    <tr class="text-center text-nowrap" th:each="emp, index : ${listaEmployeeSueldo}">
+                    <tr class="text-center text-nowrap" th:each="emp, index : ${listaGeneral}">
                         <td th:text="${index.index + 1}"></td>
-                        <td th:text="${emp.getDepartamento()}"></td>
-                        <td th:text="${emp.getEmpleado()}"></td>
-                        <td th:text="${emp.getJefeempleado()}"></td>
-                        <td th:text="${emp.getJefedepartamento()}"></td>
+                        <td th:text="${emp.firstName}"></td>
+                        <td th:text="${emp.lastName}"></td>
+                        <td th:text="${emp.salary}"></td>
+                        <td><a class="btn btn-primary" th:href="@{'/renta?id=' + ${emp.id}}">Obtener</a></td>
                     </tr>
                 </tbody>
             </table>
