@@ -1,8 +1,13 @@
 package com.example.lab6_grupo3.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Date;
 
 @Entity
 @Table(name = "employees")
@@ -12,28 +17,39 @@ public class Employee {
     @Column(name = "employee_id", nullable = false)
     private Integer id;
 
+    @NotBlank(message = "Este campo no debe estar vacio.")
+    @Size(max=25)
     @Column(name = "first_name", length = 20)
     private String firstName;
 
+    @NotBlank(message = "Este campo no debe estar vacio.")
+    @Size(max=25)
     @Column(name = "last_name", nullable = false, length = 25)
     private String lastName;
 
+    @Email
+    @NotBlank(message = "Este campo no debe estar vacio.")
+    @Size(max = 25)
     @Column(name = "email", nullable = false, length = 25)
     private String email;
 
+    @NotBlank(message = "Este campo no debe estar vacio.")
     @Column(name = "password", length = 65)
+    @Size(min = 8, message = "La contraseña debe tener como mínimo 8 caracteres.")
+    @Size(max = 65,message = "La contraseña puede tener como máximo 65 caracteres.")
     private String password;
 
     @Column(name = "phone_number", length = 20)
     private String phoneNumber;
 
     @Column(name = "hire_date", nullable = false)
-    private Instant hireDate;
+    private Date hireDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "job_id", nullable = false)
     private Job job;
 
+    @Min(value = 1,message = "El salario debe ser mayor a 0.")
     @Column(name = "salary", precision = 8, scale = 2)
     private BigDecimal salary;
 
@@ -99,11 +115,11 @@ public class Employee {
         this.job = job;
     }
 
-    public Instant getHireDate() {
+    public Date getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(Instant hireDate) {
+    public void setHireDate(Date hireDate) {
         this.hireDate = hireDate;
     }
 

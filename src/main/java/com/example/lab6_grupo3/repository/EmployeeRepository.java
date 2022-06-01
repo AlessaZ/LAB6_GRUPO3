@@ -12,4 +12,6 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
     @Query(value = "CALL listaEmpleados(:sueldo);", nativeQuery = true)
     List<EmployeeSueldoDto> findEmployeeSueldo (@Param("sueldo") BigDecimal sueldo);
+
+    List<Employee> findByEmail(String email);
 }
