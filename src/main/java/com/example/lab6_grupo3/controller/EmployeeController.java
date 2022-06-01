@@ -104,11 +104,9 @@ public class EmployeeController {
             return "employee/nuevoempleado";
         }else{
             empleado.setEnabled(1);
-            attr.addFlashAttribute("accion","alert-success");
-            attr.addFlashAttribute("msg", "Empleado creado exitosamente");
             empleado.setHireDate(new Date());
             employeesRepository.save(empleado);
-            return "redirect:/employee/employeeSueldo";
+            return "redirect:/employee/lista";
             }
         }
     }
