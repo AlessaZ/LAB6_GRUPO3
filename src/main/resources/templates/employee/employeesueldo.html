@@ -11,17 +11,9 @@
     <body>
         <!-- Navbar-->
         <div class="container">
-            <header class="d-flex justify-content-center py-3">
-                <nav class="nav nav-pills nav-fill">
-                    <a class="nav-link active" aria-current="page" th:href="@{/employee/employeeSueldo}">Ejercicio 1
-                        (a)</a>
-                    <a class="nav-link" href="#">Much longer nav link</a>
-                    <a class="nav-link" href="#">Link</a>
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </nav>
-            </header>
+            <header th:replace="fragments/navbar.html :: navbar(opcion = 'empleadoSueldo')"></header>
         </div>
-        <div class="container text-center">
+        <div class="container text-center ">
             <h1 th:text="${'Lista de empleados con sueldo mayor a '+ monto }"></h1>
             <form class="row g-3 text-center" th:method="get" th:action="@{/employee/employeeSueldo}">
                 <div class="col-md-4">
