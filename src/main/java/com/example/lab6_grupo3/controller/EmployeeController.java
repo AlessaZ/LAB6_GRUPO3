@@ -29,5 +29,13 @@ public class EmployeeController {
         return "employee/employeesueldo";
     }
 
+    @GetMapping(value = {"/emplExperiencia"})
+    public String empleadoExperiencia(Model model){
+        model.addAttribute("listEmpleadoExperiencia",employeeRepository.listarExmpleadoExperiencia());
+        return "employee/empleadoExperiencia";
+    }
+
+
+
 
 }
