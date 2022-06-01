@@ -17,7 +17,7 @@ public class EmployeeController {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @GetMapping(value = {"/employeeSueldo"})
+    @GetMapping(value = {"","/employeeSueldo"})
     public String listaEmployeeSueldo(Model model, @RequestParam(value = "sueldo",required = false) Double monto) {
 
         BigDecimal montoDecimal = BigDecimal.valueOf(0);
