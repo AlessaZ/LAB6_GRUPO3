@@ -15,12 +15,13 @@
         </div>
         <div class="container text-center ">
             <h1 th:text="${'Lista de empleados con sueldo mayor a '+ monto }"></h1>
-            <form class="row g-3 text-center" th:method="get" th:action="@{/employee/employeeSueldo}">
-                <div class="col-md-4">
-                    <label for="sueldo" class="form-label">Monto mínimo</label>
+            <div class="container justify-content-center" style="width: 250px;">
+                <form class=" text-center" th:method="get" th:action="@{/employee/employeeSueldo}">
+                    <label for="sueldo" class="form-label">Ingrese monto mínimo</label>
                     <input type="number" class="form-control" id="sueldo" name="sueldo">
-                </div>
-            </form>
+                </form>
+            </div>
+
         </div>
 
         <div class="container mt-5">
